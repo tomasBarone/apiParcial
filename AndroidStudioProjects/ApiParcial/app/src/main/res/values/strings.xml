@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ApiParcial</string>
+    <string name="iv_personaje">Imagen del Personaje</string>
+</resources>
