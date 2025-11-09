@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores de la app -->
+
+    <color name="background_light">#F5F5F5</color>
+
+    <color name="primary_text">#333333</color>
+
+    <color name="secondary_text">#666666</color>
+
+
+
+    <!-- LinearLayout (verde) -->
+
+    <color name="linear_dark">#2E7D32</color>
+
+    <color name="linear_btn1">#81C784</color>
+
+    <color name="linear_btn2">#4CAF50</color>
+
+    <color name="linear_btn3">#2E7D32</color>
+
+
+
+    <!-- FrameLayout (azul) -->
+
+    <color name="frame_dark">#1565C0</color>
+
+    <color name="frame_background">#E3F2FD</color>
+
+    <color name="frame_front">#42A5F5</color>
+
+
+
+    <!-- ConstraintLayout (naranja) -->
+
+    <color name="constraint_dark">#F57C00</color>
+
+    <color name="constraint_btn1">#FFCC80</color>
+
+    <color name="constraint_btn3">#FFA726</color>
+
+    <color name="constraint_btn5">#FB8C00</color>
+
+
+</resources>

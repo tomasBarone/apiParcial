@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A1A1A"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <!-- Título principal de la aplicación -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Rick y Morty Character Finder"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Campo de entrada de texto (ID o Nombre) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCharacterInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="ID (ej: 1) o Nombre (ej: Rick)"
+            android:textColorHint="#999999"
+            app:boxStrokeColor="#00FF7F"
+            app:hintTextColor="#00FF7F"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tieCharacterInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@android:color/transparent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Contenedor para los botones -->
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tilCharacterInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Botón de Búsqueda -->
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Buscar Personaje"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#00FF7F"
+                android:textColor="#1A1A1A"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"/>
+
+            <!-- Botón de Historial -->
+            <Button
+                android:id="@+id/btnHistory"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Historial"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#00FF7F"
+                android:textColor="#1A1A1A"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"/>
+        </LinearLayout>
+
+        <!-- Indicador de carga -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminateTint="#00FF7F"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/llButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Mensaje de Error (Inicialmente oculto) -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mensaje de Error"
+            android:textColor="#FF6347"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:visibility="gone"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/llButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Tarjeta del Personaje (CardView) - Diseño de Panel de Datos -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCharacter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="#2C2C2C"
+            app:layout_constraintTop_toBottomOf="@id/llButtons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Imagen del Personaje -->
+                <ImageView
+                    android:id="@+id/ivCharacter"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Imagen del Personaje"
+                    android:background="@drawable/ic_launcher_background"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Información Principal -->
+                <TextView
+                    android:id="@+id/tvCharacterName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"
+                    tools:text="Nombre: Rick Sanchez"/>
+
+                <TextView
+                    android:id="@+id/tvCharacterId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="8dp"
+                    tools:text="ID: #1"/>
+
+                <TextView
+                    android:id="@+id/tvCharacterStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#00FF7F"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="4dp"
+                    tools:text="Estado: Alive"/>
+
+                <TextView
+                    android:id="@+id/tvCharacterSpecies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B0C4DE"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"
+                    tools:text="Especie: Human"/>
+
+                <!-- Contenedor de Detalles Extra (Colapsable) -->
+                <LinearLayout
+                    android:id="@+id/extraDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#3A3A3A"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvCharacterGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp"
+                        tools:text="Género: Male"/>
+
+                    <TextView
+                        android:id="@+id/tvCharacterOrigin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp"
+                        tools:text="Origen: Earth (C-137)"/>
+
+                    <TextView
+                        android:id="@+id/tvCharacterLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        tools:text="Ubicación: Citadel of Ricks"/>
+                </LinearLayout>
+
+                <!-- Botón para expandir/ocultar detalles -->
+                <Button
+                    android:id="@+id/btnExpandDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Mostrar detalles"
+                    android:backgroundTint="#444444"
+                    android:textColor="#00FF7F"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
